@@ -239,41 +239,41 @@
   header {
     flex-direction: column; /* Headerinhalt untereinander */
     align-items: center;
-    width: 100%; /* volle Breite */
+    width: 200%; /* volle Breite */
   }
 
   .mode-selector {
-    margin-top: 0.5rem; /* Abstand unter dem Balken */
-    position: static; /* keine absolute Positionierung mehr */
+    margin-top: 1rem; /* Abstand unter dem Balken */
+    position: center; /* keine absolute Positionierung mehr */
   }
 }
 @media (max-width: 600px) {
   .content-wrapper {
     flex-direction: column; /* alles untereinander */
-    width: 100%;
+    width: 200%;
     padding: 0.5rem;
   }
 
   .left-section {
     order: 1; /* Aufgaben zuerst */
-    width: 100%;
+    width: 200%;
   }
 
   #visualization {
     order: 2; /* Grafik danach */
-    width: 100%;
-    height: 400px; /* Höhe anpassen */
+    width: 200%;
+    height: 600px; /* Höhe anpassen */
   }
 
   table {
     order: 3; /* Tabelle zuletzt */
-    width: 100%; /* passt zur Gesamtbreite */
-    max-width: 100%;
+    width: 200%; /* passt zur Gesamtbreite */
+    max-width: 200%;
   }
 }
 @media (max-width: 600px) {
   .section {
-    min-height: 400px; /* mehr Platz für Text */
+    min-height: 500px; /* mehr Platz für Text */
     padding-bottom: 60px; /* Platz für Buttons unten */
   }
 
@@ -289,8 +289,6 @@
     height: 100% !important;
   }
 }
-
-
 
 
     table {
