@@ -244,15 +244,27 @@
 
   .section {
     width: 100%;
-    min-height: 350px;
-    padding-bottom: 80px; /* Platz für Knöpfe */
+    min-height: 400px; /* mehr Platz für Inhalt */
+    padding-bottom: 80px; /* Platz für Buttons unten */
     position: relative;
   }
 
+  /* Reihenfolge: Aufgabe -> Grafik -> Tabelle */
+  .left-section {
+    order: 1;
+  }
   #visualization {
+    order: 2;
     width: 100%;
     height: 400px;
     min-height: 350px;
+  }
+  table {
+    order: 3;
+    width: 100%;
+    max-width: 100%;
+    font-size: 0.875rem;
+    margin-top: 1rem;
   }
 
   #visualization canvas {
@@ -260,10 +272,13 @@
     height: 100% !important;
   }
 
-  table {
-    width: 80%;
-    max-width: 80%;
-    font-size: 0.875rem;
+  /* Modusauswahl unter den Balken */
+  header {
+    align-items: center;
+  }
+  .mode-selector {
+    margin-top: 0.75rem;
+    position: static;
   }
 
   .toggle-btn, button {
@@ -1002,5 +1017,3 @@ const rayLengthOut = 350; // Ausfallende Strahllänge (blauer und grüner Pfeil)
 </body>
 
 </html>
-
-
