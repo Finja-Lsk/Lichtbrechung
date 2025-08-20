@@ -1,292 +1,315 @@
+
 <!DOCTYPE html>
 <html lang="de">
 
 <head>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-<script id="MathJax-script" async
-  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script id="MathJax-script" async
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Brechungsgesetz Lernumgebung</title>
-  <style>
-    body, h1, h2, h3, p, button, select, table, th, td {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      color: #222;
-      font-size: 1rem;
-    }
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brechungsgesetz Lernumgebung</title>
+    <style>
+        body, h1, h2, h3, p, button, select, table, th, td {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            color: #222;
+            font-size: 1rem;
+        }
 
-    body {
-      background-color: #f4f4f4;
-    }
+        body {
+            background-color: #f4f4f4;
+        }
 
-    header {
-        display: flex;
-  justify-content: center; /* Zentriere den Inhalt horizontal */
-  align-items: center; /* Zentriere den Inhalt vertikal */
-      background-color: #01796f;
-      padding: 2rem;
-      text-align: center;
-      position: relative;
-      font-size: 8rem;
-      color: white;
-      margin-bottom: 1rem;
-    }
-    
-    header h1 {
-      color: white;
-      font-size: 2rem;
-    }
-    
-    .mode-selector {
-      background-color: white;
-  color: #01796f;
-  border-radius: 5px;
-  border: none;
-  padding: 0.5rem;
-  font-weight: bold;
-  cursor: pointer;
-  font-size: 0.875rem;
-  position: absolute;
-  top: 50%;
-  right: 1rem; /* Platzierung 1rem von der rechten Kante */
-  transform: translateY(-50%); /* Vertikale Zentrierung */
-}
-    .content-wrapper {
-      display: flex;
-      flex-direction: row;
-      gap: 1rem;
-      width: 95%;
-      height: calc(100vh - 8.5rem);
-      margin: 0 auto;
-      padding: 1rem 2.5%;
-    }
+        header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #01796f;
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+            color: white;
+            margin-bottom: 1rem;
+        }
 
-    .left-section, .right-section {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      height: 100%;
-    }
+        header h1 {
+            color: white;
+            font-size: 2rem;
+        }
 
-    .left-section {
-      flex: 1 0 35%;
-    }
+        .mode-selector {
+            background-color: white;
+            color: #01796f;
+            border-radius: 5px;
+            border: none;
+            padding: 0.5rem;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 0.875rem;
+            margin-top: 1rem;
+        }
 
-    .right-section {
-      flex: 1 0 60%;
-    }
+        .content-wrapper {
+            display: flex;
+            flex-direction: row;
+            gap: 1rem;
+            width: 95%;
+            margin: 0 auto;
+            padding: 1rem 2.5%;
+        }
 
-    .section {
-      background: white;
-      border-radius: 10px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  border: 1px solid #e0e0e0;
-      padding: 1.2rem;
-      display: flex;
-      flex-direction: column;
-      height: calc(100% - 2rem);
-      position: relative;
-      margin-bottom: 2rem;
-    }
+        .left-section, .right-section {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
 
-    #visualization {
-      flex: 1;
-      background: #eafaf8;
-      border: 2px solid #01796f;
-      border-radius: 10px;
-      overflow: hidden;
-      width: 100%;
-      height: 400px; /* Set a fixed height */
-      position: relative;
-    }
+        .left-section {
+            flex: 1 0 35%;
+        }
 
-    #controls {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
+        .right-section {
+            flex: 1 0 60%;
+        }
 
-    .slider-group {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      font-size: 1rem;
-    }
+        .section {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e0e0e0;
+            padding: 1.2rem;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            margin-bottom: 2rem;
+        }
 
-    .slider-group label {
-      flex: 1;
-      margin-right: 0.5rem;
-    }
+        #visualization {
+            flex: 1;
+            background: #eafaf8;
+            border: 2px solid #01796f;
+            border-radius: 10px;
+            overflow: hidden;
+            width: 100%;
+            min-height: 400px; /* Set a minimum height for larger displays */
+            height: 400px;
+            position: relative;
+        }
 
-    .slider-group input[type="range"] {
-      flex: 2;
-    }
+        #controls {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
 
-    input[type="range"]#alpha {
-      accent-color: #d9534f;
-    }
+        .slider-group {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 1rem;
+        }
 
-    input[type="range"]#beta {
-      accent-color: #3c763d;
-    }
+        .slider-group label {
+            flex: 1;
+            margin-right: 0.5rem;
+        }
 
-    input[type="range"]#n1,
-    input[type="range"]#n2 {
-      accent-color: #01796f;
-    }
+        .slider-group input[type="range"] {
+            flex: 2;
+        }
 
-    canvas {
-      width: 100%;
-      height: 100%;
-    }
+        input[type="range"]#alpha {
+            accent-color: #d9534f;
+        }
 
-    #betaToggleContainer {
-      text-align: center;
-      margin: 1rem 0;
-    }
+        input[type="range"]#beta {
+            accent-color: #3c763d;
+        }
 
-    .toggle-btn, button {
-      padding: 0.5rem 1.2rem;
-      font-size: 1rem;
-      cursor: pointer;
-      border-radius: 5px;
-      border: none;
-      background-color: #01796f;
-      color: white;
-    }
+        input[type="range"]#n1,
+        input[type="range"]#n2 {
+            accent-color: #01796f;
+        }
 
-    .toggle-btn:hover, button:hover {
-      background-color: #015f57;
-    }
+        canvas {
+            width: 100%;
+            height: 100%;
+        }
 
-    #totalReflexionOverlay, #totalReflexionHintSmall {
-      position: absolute;
-      user-select: none;
-      pointer-events: none;
-      display: none;
-    }
+        #betaToggleContainer {
+            text-align: center;
+            margin: 1rem 0;
+        }
 
-    #totalReflexionOverlay {
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      color: red;
-      font-size: 48px;
-      font-weight: 900;
-      background: rgba(255, 255, 255, 0.8);
-      padding: 0.5rem 2rem;
-      border: 4px solid red;
-      border-radius: 15px;
-      text-align: center;
-      z-index: 10;
-    }
+        .toggle-btn, button {
+            padding: 0.5rem 1.2rem;
+            font-size: 1rem;
+            cursor: pointer;
+            border-radius: 5px;
+            border: none;
+            background-color: #01796f;
+            color: white;
+        }
 
-    #totalReflexionHintSmall {
-      bottom: 15px;
-      left: 15px;
-      align-items: center;
-      gap: 6px;
-      font-weight: bold;
-      color: red;
-      font-size: 16px;
-      display: flex;
-      z-index: 5;
-    }
+        .toggle-btn:hover, button:hover {
+            background-color: #015f57;
+        }
 
-    #taskControls, #uebungControls {
-      display: flex;
-      justify-content: space-between;
-      position: absolute;
-      bottom: 10px;
-      left: 10px;
-      right: 10px;
-    }
+        #totalReflexionOverlay, #totalReflexionHintSmall {
+            position: absolute;
+            user-select: none;
+            pointer-events: none;
+            display: none;
+        }
 
-    #infoPoint {
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-      background-color: #01796f;
-      color: white;
-      font-weight: bold;
-      text-align: center;
-      line-height: 30px;
-      cursor: pointer;
-      position: absolute;
-      top: 15px;
-      left: 15px;
-      z-index: 21;
-    }
+        #totalReflexionOverlay {
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: red;
+            font-size: 48px;
+            font-weight: 900;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 0.5rem 2rem;
+            border: 4px solid red;
+            border-radius: 15px;
+            text-align: center;
+            z-index: 10;
+            animation: pulse 1s infinite;
+        }
 
-    #infoBtn {
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-      background-color: #01796f;
-      color: white;
-      font-weight: bold;
-      text-align: center;
-      line-height: 30px;
-      cursor: pointer;
-      margin-top: 10px;
-      z-index: 20;
-    }
+        @keyframes pulse {
+          0%, 100% {
+            transform: scale(1);
+          }
+          50% {
+            transform: scale(1.1);
+          }
+        }
 
-    @media (max-width: 600px) {
-      header {
-        font-size: 1.25rem;
-      }
+        #totalReflexionHintSmall {
+            bottom: 15px;
+            left: 15px;
+            align-items: center;
+            gap: 6px;
+            font-weight: bold;
+            color: red;
+            font-size: 16px;
+            display: flex;
+            z-index: 5;
+        }
 
-      .content-wrapper {
-        flex-direction: column;
-        height: auto;
-      }
+        #taskControls, #uebungControls {
+            display: flex;
+            justify-content: space-between;
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            right: 10px;
+        }
 
-      .slider-group {
-        font-size: 0.875rem;
-        flex-direction: column;
-        align-items: flex-start;
-      }
+        #infoPoint {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: #01796f;
+            color: white;
+            font-weight: bold;
+            text-align: center;
+            line-height: 30px;
+            cursor: pointer;
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            z-index: 21;
+        }
 
-      .slider-group label {
-        margin-bottom: 0.5rem;
-      }
+        #infoBtn {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: #01796f;
+            color: white;
+            font-weight: bold;
+            text-align: center;
+            line-height: 30px;
+            cursor: pointer;
+            margin-top: 10px;
+            z-index: 20;
+        }
 
-      #controls {
-        gap: 0.5rem;
-      }
+        @media (max-width: 600px) {
+            header {
+                font-size: 1.25rem;
+            }
 
-      .toggle-btn, button {
-        font-size: 0.875rem;
-      }
-    }
+            .content-wrapper {
+                flex-direction: column;
+                height: auto;
+            }
 
-    table {
-      width: 100%;
-      margin-top: 0.5rem;
-      border-collapse: collapse;
-      border-spacing: 0;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
-    }
+            .left-section {
+                flex: 1 0 auto;
+            }
 
-    th, td {
-      border: 1px solid #01796f;
-      padding: 10px;
-      text-align: left;
-    }
+            .right-section {
+                flex: 1 0 auto;
+            }
 
-    th {
-      background-color: #eafaf8;
-    }
+            #visualization {
+                height: 500px; /* Increase the height for mobile view */
+            }
 
-    .section h2,
-    .section h3 {
-      font-size: 1.25rem;
-      margin-bottom: 1rem;
-    }
-  </style>
+            #controls {
+                gap: 0.5rem;
+            }
+
+            .toggle-btn, button {
+                font-size: 0.875rem;
+            }
+
+            .slider-group {
+                font-size: 0.875rem;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .slider-group label {
+                margin-bottom: 0.5rem;
+            }
+
+            table {
+                font-size: 0.75rem; /* Reduce font size for mobile view */
+            }
+        }
+
+        table {
+            width: 100%;
+            margin-top: 0.5rem;
+            border-collapse: collapse;
+            border-spacing: 0;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+        }
+
+        th, td {
+            border: 1px solid #01796f;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #eafaf8;
+        }
+
+        .section h2,
+        .section h3 {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+        }
+
+    </style>
 </head>
 
 <body>
@@ -315,8 +338,7 @@
               <br>
               <li>Verändere den Einfallswinkel <em>α</em> in mehreren Schritten und notiere jeweils <em>α</em> und den Brechungswinkel <em>β</em>.</li>
               <br>
-              <li>Berechne <em>sin(α)</em>, <em>sin(β)</em> und den Quotienten <em>$$ \frac{ \sin(\alpha)}{ \sin(\beta)} $$
-</em>.</li>
+              <li>Berechne <em>sin(α)</em>, <em>sin(β)</em> und den Quotienten <em>$ \frac{ \sin(\alpha)}{ \sin(\beta)} $</em>.</li>
               <br>
               <li>Überprüfe, ob der Quotient konstant ist und formuliere eine Vermutung zum Zusammenhang.</li>
             </ul>
@@ -376,7 +398,7 @@
       <th>Brechungswinkel (β) in °</th>
       <th>sin(α)</th>
       <th>sin(β)</th>
-      <th>$$ \frac{ \sin(\alpha)}{\sin(\beta)} $$
+      <th>$ \frac{ \sin(\alpha)}{\sin(\beta)} $
 </th>
     </tr>
   </thead>
@@ -689,9 +711,8 @@
           }
         }
 
-      
-const rayLengthIn = 800;  // Einfallende Strahllänge (roter Pfeil)
-const rayLengthOut = 350; // Ausfallende Strahllänge (blauer und grüner Pfeil)
+      const rayLengthIn = 800;  // Einfallende Strahllänge (roter Pfeil)
+      const rayLengthOut = 350; // Ausfallende Strahllänge (blauer und grüner Pfeil)
 
         drawArrow(
           ctx,
